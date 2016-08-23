@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jaime
@@ -51,9 +53,14 @@ public class Ejercicio extends javax.swing.JFrame {
                 txtPersonasKeyTyped(evt);
             }
         });
-        jPanel1.add(txtPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 70, -1));
+        jPanel1.add(txtPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 70, -1));
 
         cmdCalcular.setText("calcular");
+        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
 
         jLabel3.setText("Monto a pagar");
@@ -63,6 +70,11 @@ public class Ejercicio extends javax.swing.JFrame {
         jPanel1.add(lblMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 60, -1));
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -87,6 +99,31 @@ public class Ejercicio extends javax.swing.JFrame {
               evt.consume(); 
           } 
     }//GEN-LAST:event_txtPersonasKeyTyped
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+
+        txtPersonas.setText("");
+        lblMonto.setText("");
+        
+        txtPersonas.requestFocusInWindow();
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
+
+        if(txtPersonas.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Digite la cantidad de personas de la familia a viajar","ERROR",JOptionPane.ERROR_MESSAGE);
+            txtPersonas.requestFocusInWindow();
+        }else{
+            
+            double p=Double.parseDouble(txtPersonas.getText());
+            double valor=p*25000;
+            double iva=(valor*12)/100; 
+            double montototal=valor+iva;
+            
+            lblMonto.setText(""+montototal);
+            
+        }
+    }//GEN-LAST:event_cmdCalcularActionPerformed
 
     /**
      * @param args the command line arguments
